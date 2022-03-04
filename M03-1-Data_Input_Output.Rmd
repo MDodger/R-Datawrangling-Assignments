@@ -1,0 +1,77 @@
+---
+title: 'Module 3: Data Input and Output'
+author: "Manuel Castaneda"
+date: "2/23/2022"
+output: html_document: default
+---
+
+
+
+```{r}
+#install.packages('foreign')
+#install.packages('haven')
+#install.packages('rvest')
+#install.packages('tidyverse')
+#install.packages('readxl')
+#install.packages('readr')
+#install.packages('xlsx')
+library('foreign')
+library('haven')
+library('rvest')
+library('tidyverse')
+library('readr')
+library('readxl')
+library('xlsx')
+setwd("C:/Users/manny/Desktop/R Workshop/R_Workshop_3/data/")
+
+library(help = "datasets")
+help(mtcars)
+head(mtcars)
+
+hist(mtcars$mpg)
+
+#importing csv
+BASE_perf<-read.csv("StudentsPerformance.csv")
+
+#tidy - importing files
+READR_perf<-read.csv("StudentsPerformance.csv")
+
+READR_perf$`math score`
+
+#Reading from a URL
+URL_perf <- read.csv("https://raw.githubusercontent.com/jsgriffin96/r_workshop_3_data/master/data/StudentsPerformance.csv")
+
+#read from excel
+EXCEL_perf <- read_excel ("StudentsPerformance.xlsx")
+
+
+#Read spss (using foreign)
+PsychBike <- read.spss ("PsychBike.sav", use.value.labels = TRUE, to.data.frame = TRUE)
+
+#import from clipboard
+stocks <- read.delim("clipboard")
+
+write.csv(stocks, "stocks.csv")
+
+write.xlsx(stocks, "stocks.xlsx")
+
+write_sav(stocks, "stocks.sav")
+
+#web scraping
+url <- "https://www.imdb.com/chart/bottom?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=4da9d9a5-d299-43f2-9c53-f0efa18182cd&pf_rd_r=Z2TFMCSJZQMJS52FPA69&pf_rd_s=right-4&pf_rd_t=15506&pf_rd_i=moviemeter&ref_=chtmvm_ql_8"
+
+webpage <- read_html(url)
+
+title_html <- html_nodes(webpage, "#main a")
+title <- html_text(title_html)
+
+title <- title [title!=""]
+
+year_html <- html_nodes(webpage, ".secondaryInfo")
+year <- html_text(year_html)
+
+rating_html <- html_nodes(webpage, "strong")
+rating <- html_text(rating_html)
+
+badMovies.df <- data.frame(title, year, rating)
+```

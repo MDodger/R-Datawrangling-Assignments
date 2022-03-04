@@ -1,0 +1,104 @@
+---
+title: 'Module 3: Data Input and Output'
+author: "Manuel Castaneda"
+date: "2/26/2022"
+output: html_document
+---
+
+```{r}
+#install.packages("haven")
+#install.packages("rvest")
+#install.packages("tidyverse")
+#install.packages("readr")
+#install.packages("readxl")
+#install.packages("xlsx")
+
+library('haven')
+library('rvest')
+library('tidyverse')
+library('readr')
+library('readxl')
+library('xlsx')
+```
+
+```{r}
+# Question 1: Import and read the CSV file and name it as "item_csv."
+setwd('C:/Users/manny/Desktop/R Workshop/M03')
+item_csv <- read_csv('items_ordered-2.csv')
+
+```
+
+```{r}
+# Question 2: Find the most expensive item among all the items ordered by the customers.  Your output should be the name of the item.
+
+item_csv[5,3]
+
+```
+
+```{r}
+# Question 3: Import and read the excel file and assign "item_excel" to the imported data as its name.
+item_excel <- read_excel('items_ordered-1.xlsx')
+
+```
+
+```{r}
+# Question 4: From the website https://www.cnbc.com/us-markets/ (Links to an external site.), copy the second table named "Stock Indexes" to your clipboard and assign it "stocks_indexes."  That is, you should create a data frame called "stocks_indexes. In the end, you should have 6 observations and 4 variables in the data frame. 
+
+stock_indexes <- read.delim("clipboard")
+stocks_indexes.df <- data.frame(stock_indexes)
+
+```
+
+```{r}
+# Question 5: Save the "stocks_indexes" data frame with a new csv file and excel file, separately, in the same subdirectory that you just created above (i.e., M03)
+
+write.csv(stocks_indexes.df, "stocks_indexes.csv")
+write.xlsx(stocks_indexes.df, "stocks_indexes.xlsx")
+
+```
+
+```{r}
+# Question 6: Create a histogram of the quantity for the items ordered. Next, save it as a graphics file with the name, "histogram.png."
+
+hist(item_csv$quantity)
+
+```
+
+```{r}
+# Question 7: Use the SelectorGadget extension and start web scraping the following page as follows:
+
+#Read this URL into R and assign it a name, "top_movies," as a variable. Remember to delete the spaces after you scrape the data.
+
+url <- 'https://www.imdb.com/chart/top/?ref_=nv_mv_250'
+top_movies <- read_html(url)
+#top_movie <- data.frame
+
+remove <- head(top_movies, -2)
+
+
+```
+
+```{r}
+# Question 8: On this same URL, now scrape the year and assign "year" to it as a variable name.
+year_html <- html_nodes(top_movies, '.secondaryInfo')
+year <-html_text(year_html)
+year <- year[year!=" "]
+
+```
+
+```{r}
+# Question 9: Still on this same URL, now scrape the rating and name it as a variable named "rating."
+
+rating_html <- html_nodes(top_movies, 'strong , #main a')
+rating <- html_text(rating_html)
+rating <- rating[rating!=" "]
+
+```
+```{r}
+# 10
+
+#Top250_Movies.df <- data.frame(top_movies, year, rating)
+
+```
+
+
