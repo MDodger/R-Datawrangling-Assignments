@@ -1,0 +1,36 @@
+---
+title: 'Module 1: Application to M01 - Introduction'
+author: "Manuel Castaneda"
+date: "2/13/2022"
+output: html_document
+---
+
+``` {r}
+
+x <- "This is my first assignment"
+  print(x)
+
+x = paste(x, "and I'm loving it!", sep=" ")
+  print(x)
+
+Y = c(2, 3, 4, 5)
+Y = Y * 2
+
+cat("Y => ", Y)
+
+cat("Min => ", min(Y), "\n")
+cat("Max => ", max(Y))
+
+library(ggplot2)
+head(economics)
+
+ggplot(economics, aes(x = date, y = pop)) +
+  geom_point() + 
+  labs(
+    x = "Date",
+    y = "Total population (pop)",
+    title = "Total population against date"
+    )
+```    
+    
+    

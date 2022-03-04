@@ -1,0 +1,63 @@
+---
+title: 'Module 2: Application to M02 - R Data Types'
+author: "Manuel Castaneda"
+date: "2/20/2022"
+output: html_document
+---
+
+```{r}
+
+c1 <- c('This is my first vector')
+c1 
+
+typeof(c1)
+
+stock_prices <- c(42.5, 43.0, 44.1, 2.7)
+stock_prices
+
+typeof(stock_prices)
+
+
+stock_company <- c('Microsoft', 'Apple', 'Facebook', 'Tesla')
+stock_company
+stock_ticks <- c('MSFT', 'AAPL', 'FB', 'TSLA', 'NEW')
+stock_ticks
+make_cars <- c(FALSE, FALSE, FALSE,  TRUE, TRUE)
+make_cars
+
+stock_prices <- c(stock_prices,5)
+stock_prices
+
+stock_company <- c(stock_company,'NEW')
+stock_company
+
+odd.mat= seq(from = 1, by = 2, length.out = 50)
+
+rown <- c("r1", "r2", "r3", "r4", "r5")
+coln <- c("c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10")
+  
+m <- matrix(odd.mat, nrow = 5, byrow = TRUE, 
+            dimnames = list(rown, coln))
+m
+
+
+stock_info.df <- data.frame(stock_prices, stock_company, stock_ticks, make_cars)
+
+nrow(stock_info.df)
+ncol(stock_info.df)
+
+
+str(stock_info.df)
+summary(stock_info.df)
+
+
+row5 <- data.frame(stock_prices=50.4, stock_company="General Motors", stock_ticks="GM", make_cars=TRUE)
+
+stock_info.df<-rbind(stock_info.df, row5)
+
+open_price <- c(42.3, 42.8, 44.5, 42.9, 50.3, 52.5)
+stock_info.df<-cbind(stock_info.df, open_price)
+
+day_percentage <- c()
+
+```

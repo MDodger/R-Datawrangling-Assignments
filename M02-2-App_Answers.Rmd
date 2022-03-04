@@ -1,0 +1,100 @@
+---
+title: 'Module 2: Application to M02 - R Data Types'
+author: "Jae Min Jung"
+date: "2/13/2022"
+output: html_document
+---
+
+# 1. Create a character vector and assign the following string, "This is my first vector," and verify its class.
+
+```{r character vector}
+vec.char <- "This is my first vector"
+class(vec.char)
+```
+
+
+# 2. Create a numeric vector called "stock_prices" and assign the values: 42.5, 43.0, 44.1, and 2.7 to this vector. Next, verify the class of it.
+
+```{r numeric vector}
+stock_prices <- c(42.5, 43.0, 44.1, 2.7)
+class(stock_prices)
+
+```
+
+
+# 3. Now, create three new vectors: 
+
+stock_company and assign the following companies as a vector: Microsoft, Apple, Facebook, and Tesla;
+stock_ticks and assign the following as a vector: MSFT, AAPL, FB, and TSLA;
+make_cars and assign the logical values: FALSE, FALSE, FALSE, and TRUE.
+After that, add 5 to the vector "stock_prices" and name it using the "stock_company" vector created above.
+
+```{r}
+stock_company <- c('Microsft', 'Apple', 'Facebook', 'Tesla')
+stock_ticks <- c('MSFT', 'AAPL', 'FB', 'TSLA')
+make_car <- c(FALSE,FALSE,FALSE,TRUE)
+stock_prices <- stock_prices + 5
+names(stock_prices) <- stock_company
+
+```
+
+
+# 4. Create a matrix named "odd.mat" that consists of odd numbers starting with "1" with 10 columns and 5 rows. Hints: You can type 50 odd numbers directly. Alternatively, you can use a function called seq as follows: seq(from = 1, by = 2, length.out = 50). 
+
+```{r}
+?seq()
+seq(from = 1, by = 2, length.out = 50)
+matrix(seq(from = 1, by = 2, length.out = 50))
+odd.mat <- matrix(seq(from = 1, by = 2, length.out = 50), nrow = 5) #answer based on the hint
+odd.mat1 <- matrix(seq(1,99,2), nrow = 5) # finding out the last odd number is not easy
+odd.mat2 <- matrix((1:50)*2 - 1, nrow = 5) # a creative way but could be hard for with non-science majors
+
+```
+
+
+# 5. Create a data frame called "stock_info.df" which is composed of the four vectors created on #2 and #3 above. Verify the number of rows and columns, and also display the summary.  
+
+```{r}
+stock_info.df <- data.frame(stock_prices, stock_company, stock_ticks, make_car)
+summary(stock_info.df)
+
+```
+
+
+# 6. Change the value 2.7 of your data frame to 42.7
+```{r}
+stock_info.df[4,1] <- 42.7
+```
+
+
+# 7. Add a new row to your data frame with the following information: stock_prices = 50.4, stock_company = General Motors, stock_ticks = GM, and make_cars = TRUE
+```{r}
+GM <- data.frame(stock_prices=50.4, stock_company="General Motors", stock_ticks="GM", make_car=TRUE)
+stock_info.df <- rbind(stock_info.df, GM)
+```
+
+
+# 8. Add a new column with the following column name and values: open_price = 42.3, 42.8, 44.5, 42.9 and 50.3
+```{r}
+open_price <- c(42.3, 42.8, 44.5, 42.9, 50.3)
+stock_info.df <- cbind(stock_info.df, open_price)
+```
+
+# 9. Now, create a new vector called day_percentage, to show if the stock increased or decreased its price at the end of the day. Hints: Consider the stock_prices as the value of the close price.
+```{r}
+stock_info.df$day_percentage <- (stock_info.df$stock_prices - stock_info.df$open_price)/stock_info.df$open_price*100
+
+```
+
+
+# 10. Which stock has increased his value and which ones have decreased? Use the function "subset" to select the two types of stocks. 
+```{r}
+uptick <- subset(stock_info.df, day_percentage > 0)
+downtick <- subset(stock_info.df, day_percentage < 0)
+names(stock_info.df$stock_prices) <-stock_info.df$stock_company
+stock_info.df
+```
+
+
+
+

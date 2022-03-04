@@ -1,0 +1,24 @@
+---
+title: 'Module 1: Introduction'
+author: "Manuel Castaneda"
+date: "2/13/2022"
+output: html_document
+---
+
+
+```{r}
+#install(ggplot2")
+
+library("ggplot2")
+
+theme_set(theme_classic())
+
+g <- ggplot(mpg, aes(cty)) #MPG is a build in r dataset
+g + geom_density(aes(fill=factor(cyl)), alpha=0.8) + #fill on number of cylinders
+  labs(title="Density plot",
+       subtitle="City Mileage Grouped by Number of cylinders",
+       caption="Source: mpg dataset",
+       x="City Mileage",
+       fill="# Cylinders")
+
+```
